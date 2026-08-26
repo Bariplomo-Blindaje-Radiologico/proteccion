@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/materiales/barita", "destination": "/index.html" },
+    { "source": "/productos/lamina-plomo", "destination": "/index.html" },
+    { "source": "/productos/vidrio-plomoso", "destination": "/index.html" },
+    { "source": "/servicios/colocacion-laminado", "destination": "/index.html" },
+    { "source": "/servicios/baritado", "destination": "/index.html" },
+    { "source": "/servicios/estudios-certificados", "destination": "/index.html" },
+    { "source": "/cotizar", "destination": "/index.html" }
+  ]
+}
