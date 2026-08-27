@@ -42,7 +42,8 @@ const groups = [
 ];
 
 function App() {
-  const [page, setPage] = useState('home');
+  const initialPage = window.location.hash ? (window.location.hash.slice(1).split('#')[0] || 'home') : 'home';
+  const [page, setPage] = useState(pages[initialPage] ? initialPage : 'home');
   const [mobileOpen, setMobileOpen] = useState(false);
   const iframeRef = useRef(null);
 
@@ -80,6 +81,10 @@ function App() {
     };
     const onLoad = () => {
       resize();
+      try {
+        const hash = new URL(frame.src).hash;
+        if (hash) frame.contentWindow.location.hash = hash;
+      } catch (_) {}
       try {
         const observer = new ResizeObserver(resize);
         observer.observe(frame.contentDocument.documentElement);
