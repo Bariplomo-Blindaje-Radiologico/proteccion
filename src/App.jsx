@@ -44,6 +44,7 @@ function App() {
   const [page, setPage] = useState(pages[initialPage] ? initialPage : 'home');
   const [mobileOpen, setMobileOpen] = useState(false);
   const iframeRef = useRef(null);
+  const requestedHashRef = useRef('');
   const resizeObserverRef = useRef(null);
   const resizeTimerRef = useRef(null);
 
@@ -63,16 +64,19 @@ function App() {
 
   const navigate = useCallback((key, hash = '') => {
     if (!pages[key]) return;
+    requestedHashRef.current = hash || '';
+    const samePage = page === key;
     setPage(key);
     setMobileOpen(false);
     window.history.replaceState({}, '', key === 'home' && !hash ? '/' : `/#${key}${hash || ''}`);
-    const nextSrc = `${pages[key]}${hash || ''}`;
-    if (iframeRef.current && iframeRef.current.src !== new URL(nextSrc, window.location.origin).href) {
-      iframeRef.current.src = nextSrc;
+
+    // For the same page, change the iframe immediately. For a new page,
+    // the page effect below will load it with the requested hash.
+    if (samePage && iframeRef.current) {
+      iframeRef.current.src = `${pages[key]}${hash || ''}`;
+      window.setTimeout(() => scrollFrameToHash(hash), 50);
     }
-    // If we stay on the same document, move immediately to the requested section.
-    window.setTimeout(() => scrollFrameToHash(hash), 0);
-  }, [scrollFrameToHash]);
+  }, [page, scrollFrameToHash]);
 
   useEffect(() => {
     const onMessage = (event) => {
@@ -87,9 +91,12 @@ function App() {
       const key = getRoute();
       if (pages[key]) {
         const hash = window.location.hash.split('#').slice(2).join('#');
+        requestedHashRef.current = hash ? `#${hash}` : '';
         setPage(key);
         setMobileOpen(false);
-        if (iframeRef.current) iframeRef.current.src = `${pages[key]}${hash ? `#${hash}` : ''}`;
+        if (iframeRef.current && key === page) {
+          iframeRef.current.src = `${pages[key]}${hash ? `#${hash}` : ''}`;
+        }
       }
     };
     window.addEventListener('message', onMessage);
@@ -103,7 +110,9 @@ function App() {
   useEffect(() => {
     const frame = iframeRef.current;
     if (!frame) return;
-    frame.src = currentSrc;
+    const hash = requestedHashRef.current || '';
+    requestedHashRef.current = '';
+    frame.src = `${currentSrc}${hash}`;
   }, [currentSrc]);
 
   useEffect(() => {
@@ -131,19 +140,29 @@ function App() {
             .bp-nav { display: none !important; }
             .bp-mobile-menu { display: none !important; }
             main { min-height: 0 !important; }
+            [class*="h-[80vh]"], [class*="h-[90vh]"] {
+              height: 560px !important;
+              min-height: 0 !important;
+            }
+            [class*="min-h-screen"] { min-height: 0 !important; }
           `;
           doc.head.appendChild(style);
         }
         const body = doc.body;
-        const html = doc.documentElement;
-        const height = Math.ceil(Math.max(
-          body.scrollHeight,
-          body.offsetHeight,
-          body.getBoundingClientRect().height,
-          html.scrollHeight,
-          html.offsetHeight,
-          html.getBoundingClientRect().height
-        ));
+
+        // Do NOT use html.getBoundingClientRect().height here: inside an iframe
+        // it equals the iframe viewport. That creates a circular 90vh -> iframe
+        // height -> 90vh expansion and produces an apparently infinite page.
+        // Measure the real document content instead.
+        let contentBottom = 0;
+        Array.from(body.children).forEach((el) => {
+          if (!el || typeof el.getBoundingClientRect !== 'function') return;
+          const rect = el.getBoundingClientRect();
+          if (getComputedStyle(el).position === 'fixed') return;
+          contentBottom = Math.max(contentBottom, rect.bottom + window.scrollY);
+        });
+
+        const height = Math.ceil(Math.max(contentBottom, 1));
         if (height > 0) frame.style.height = `${height}px`;
       } catch (_) {}
     };
@@ -181,7 +200,7 @@ function App() {
       cleanupObserver();
       window.clearTimeout(resizeTimerRef.current);
     };
-  }, [currentSrc, scrollFrameToHash]);
+  }, [page, scrollFrameToHash]);
 
   return (
     <div className="site-shell">
@@ -209,7 +228,11 @@ function App() {
         <iframe ref={iframeRef} title="Contenido BARIPLOMO" src={currentSrc} className="page-frame" />
       </main>
       <a className="whatsapp-fab" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp Business de BARIPLOMO" title="WhatsApp Business BARIPLOMO">
-        <span className="whatsapp-icon" aria-hidden="true">⌕</span>
+        <span className="whatsapp-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="img" aria-hidden="true">
+            <path d="M16 3.2a12.6 12.6 0 0 0-10.9 19L3.4 29l7-1.6A12.6 12.6 0 1 0 16 3.2Zm0 22.8c-2 0-3.9-.6-5.5-1.7l-.4-.3-4.1.9.9-4-.3-.4A10.4 10.4 0 1 1 16 26Zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.1-.3-.5.3-.4.8-1.4.1-.2.1-.4 0-.6l-.9-2.1c-.2-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.3 3.6 5.6 5 .8.3 1.4.5 1.9.6.8.3 1.5.2 2 .1.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4Z"/>
+          </svg>
+        </span>
       </a>
     </div>
   );

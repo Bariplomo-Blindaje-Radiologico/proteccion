@@ -182,7 +182,7 @@ body { padding-top:0 !important; }
 })();
 </script>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative">
+<body class="bg-background text-on-background font-body-md flex flex-col relative">
 <!-- TopNavBar -->
 
 <nav aria-label="Navegación principal" class="bp-nav">
@@ -258,7 +258,7 @@ body { padding-top:0 !important; }
 <div class="max-w-4xl mx-auto bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-10 shadow-sm relative overflow-hidden">
 <!-- Subtle decorative element indicating precision -->
 <div class="absolute top-0 right-0 w-32 h-1 bg-emergency-blue"></div>
-<form action="mailto:bariplomo@gmail.com" class="space-y-8" enctype="text/plain" method="post">
+<form id="bariplomo-quote-form" action="mailto:bariplomo@gmail.com" class="space-y-8" enctype="text/plain" method="post">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <!-- Empresa -->
 <div>
@@ -343,6 +343,36 @@ body { padding-top:0 !important; }
 </div>
 </div>
 </footer>
+<script id="bariplomo-mail-form">
+(function(){
+  var form=document.getElementById('bariplomo-quote-form');
+  if(!form) return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    var get=function(name){ var el=form.elements[name]; return el ? el.value.trim() : ''; };
+    var body=[
+      'Solicitud de cotización BARIPLOMO',
+      '',
+      'Empresa / clínica: '+get('Empresa'),
+      'Contacto: '+get('Contacto'),
+      'Teléfono: '+get('Telefono'),
+      'Ciudad: '+get('Ciudad'),
+      'Correo: '+get('Email'),
+      '',
+      'Requerimientos:',
+      get('Requerimientos')
+    ].join('\n');
+    var subject='Solicitud de cotización BARIPLOMO';
+    var gmail='https://mail.google.com/mail/?view=cm&fs=1&to=bariplomo%40gmail.com&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    var opened=window.open(gmail,'_blank','noopener,noreferrer');
+    if(!opened){
+      window.location.href='mailto:bariplomo@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    }
+  });
+})();
+</script>
+
 <script>
         // Set current date in localized format
         document.addEventListener('DOMContentLoaded', () => {
