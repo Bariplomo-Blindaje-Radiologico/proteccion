@@ -401,11 +401,11 @@ body { padding-top:0 !important; }
 <div class="flex flex-col md:items-end justify-center">
 <h4 class="font-title-md text-title-md mb-4">Síguenos</h4>
 <div class="flex flex-wrap justify-center md:justify-end gap-4 font-body-md text-body-md">
-<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="#">YouTube</a>
-<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="#">Instagram</a>
-<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="#">Facebook</a>
-<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="#">TikTok</a>
-<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="#">Google Business</a>
+<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="https://www.youtube.com/@bariplomorayosxblindajemx">YouTube</a>
+<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="https://www.instagram.com/bariplomoblindaje/">Instagram</a>
+<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="https://www.facebook.com/Bariplomo.Blindaje.Radiologico">Facebook</a>
+<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="https://www.tiktok.com/@bariplomo.blindaj">TikTok</a>
+<a class="text-on-primary-container opacity-80 hover:opacity-100 hover:text-tertiary-fixed-dim transition-all hover:underline" href="https://share.google/1JngXlWV6n6Y3yctr">Google Business</a>
 </div>
 </div>
 </div>
@@ -413,11 +413,6 @@ body { padding-top:0 !important; }
 <p class="font-label-sm text-label-sm opacity-60">BARIPLOMO. Blindaje Radiológico Profesional. Todos los derechos reservados.</p>
 </div>
 </footer>
-<!-- SideNavBar (WhatsApp FAB) -->
-<a class="fixed bottom-8 right-8 z-50 flex items-center justify-center cursor-pointer animate-bounce bg-primary text-on-primary rounded-full w-16 h-16 shadow-md hover:shadow-xl hover:scale-110 hover:bg-secondary transition-transform" href="#">
-<span class="material-symbols-outlined text-3xl">chat</span>
-<span class="sr-only">WhatsApp</span>
-</a>
 
 <script id="bariplomo-global-js">
 (function(){
@@ -505,4 +500,19 @@ body { padding-top:0 !important; }
 })();
 </script>
 
+
+<a id="bariplomo-direct-whatsapp" href="https://wa.me/525528220554?text=Hola%20BARIPLOMO%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Business BARIPLOMO" style="display:none;position:fixed;right:22px;bottom:22px;z-index:99999;width:58px;height:58px;border-radius:50%;align-items:center;justify-content:center;background:#25D366;color:#fff;text-decoration:none;font:700 30px Arial;box-shadow:0 8px 24px rgba(0,0,0,.22);">⌕</a>
+<script>if(window.self===window.top){var w=document.getElementById('bariplomo-direct-whatsapp');if(w)w.style.display='flex';}</script>
+
+<script id="bariplomo-navigation-bridge-v2">(function(){
+  var map={
+    'index.html':'home','home.html':'home','materiales-barita-mortero.html':'materiales','materiales-plomo-pegamento.html':'plomo','productos-vidrio-puertas-mamparas.html':'productos','estudios-certificados.html':'estudios','servicio-aplicacion-baritado.html':'aplicacion','servicio-colocacion-laminado.html':'colocacion','cotizar.html':'cotizar'
+  };
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+    var u; try{u=new URL(a.href,location.href);}catch(_){return;}
+    var key=map[u.pathname.split('/').pop()]; if(!key) return;
+    if(window.parent && window.parent!==window){ e.preventDefault(); window.parent.postMessage({type:'bariplomo:navigate',page:key,hash:u.hash||''},location.origin); }
+  },true);
+})();</script>
 </body></html>

@@ -292,7 +292,7 @@ body { padding-top:0 !important; }
 <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Soluciones integrales de blindaje radiológico con o sin cavidad para mirilla, diseñadas para máxima seguridad y durabilidad.</p>
 </div>
 <!-- Technical Sheet -->
-<div class="glass-panel p-2 md:p-8 rounded-xl shadow-sm border border-outline-variant mb-20"><div class="grid grid-cols-1 lg:grid-cols-2 gap-8"><div class="space-y-4"><h4 class="font-title-md text-on-surface text-center">Puerta Emplomada</h4><div class="bp-sheet-wrap"><img alt="Ficha Técnica Puerta Emplomada" class="w-full h-auto object-contain rounded bp-sheet" draggable="false" src="/bariplomo-pages/assets/fichas/puerta.png"/></div></div><div class="space-y-4"><h4 class="font-title-md text-on-surface text-center">Mampara Emplomada</h4><div class="bp-sheet-wrap"><img alt="Ficha Técnica Mampara Emplomada" class="w-full h-auto object-contain rounded bp-sheet" draggable="false" src="/bariplomo-pages/assets/fichas/mampara.png"/></div></div></div></div>
+<div class="glass-panel p-2 md:p-8 rounded-xl shadow-sm border border-outline-variant mb-20"><div class="grid grid-cols-1 lg:grid-cols-2 gap-8"><div class="space-y-4" id="puerta"><h4 class="font-title-md text-on-surface text-center">Puerta Emplomada</h4><div class="bp-sheet-wrap"><img alt="Ficha Técnica Puerta Emplomada" class="w-full h-auto object-contain rounded bp-sheet" draggable="false" src="/bariplomo-pages/assets/fichas/puerta.png"/></div></div><div class="space-y-4"><h4 class="font-title-md text-on-surface text-center">Mampara Emplomada</h4><div class="bp-sheet-wrap"><img alt="Ficha Técnica Mampara Emplomada" class="w-full h-auto object-contain rounded bp-sheet" draggable="false" src="/bariplomo-pages/assets/fichas/mampara.png"/></div></div></div></div>
 <!-- Installation Gallery -->
 <div class="mb-16">
 <h3 class="font-title-md text-title-md text-on-surface mb-8">Galería de Instalación y Tipos</h3>
@@ -491,14 +491,6 @@ body { padding-top:0 !important; }
         </div>
 </div>
 </footer>
-<!-- SideNavBar (FAB) -->
-<a aria-label="Asesoría Técnica" class="fixed bottom-8 right-8 z-50 flex items-center justify-center cursor-pointer bg-safety-yellow rounded-full w-16 h-16 shadow-lg hover:scale-110 transition-transform group" href="#">
-<span class="material-symbols-outlined text-on-tertiary-fixed text-3xl" data-icon="chat">chat</span>
-<!-- Tooltip -->
-<span class="absolute right-full mr-4 bg-[#07101c] text-pure-white font-label-sm text-label-sm px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            Asesoría Técnica
-        </span>
-</a>
 
 <script id="bariplomo-global-js">
 (function(){
@@ -586,4 +578,19 @@ body { padding-top:0 !important; }
 })();
 </script>
 
+
+<a id="bariplomo-direct-whatsapp" href="https://wa.me/525528220554?text=Hola%20BARIPLOMO%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Business BARIPLOMO" style="display:none;position:fixed;right:22px;bottom:22px;z-index:99999;width:58px;height:58px;border-radius:50%;align-items:center;justify-content:center;background:#25D366;color:#fff;text-decoration:none;font:700 30px Arial;box-shadow:0 8px 24px rgba(0,0,0,.22);">⌕</a>
+<script>if(window.self===window.top){var w=document.getElementById('bariplomo-direct-whatsapp');if(w)w.style.display='flex';}</script>
+
+<script id="bariplomo-navigation-bridge-v2">(function(){
+  var map={
+    'index.html':'home','home.html':'home','materiales-barita-mortero.html':'materiales','materiales-plomo-pegamento.html':'plomo','productos-vidrio-puertas-mamparas.html':'productos','estudios-certificados.html':'estudios','servicio-aplicacion-baritado.html':'aplicacion','servicio-colocacion-laminado.html':'colocacion','cotizar.html':'cotizar'
+  };
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+    var u; try{u=new URL(a.href,location.href);}catch(_){return;}
+    var key=map[u.pathname.split('/').pop()]; if(!key) return;
+    if(window.parent && window.parent!==window){ e.preventDefault(); window.parent.postMessage({type:'bariplomo:navigate',page:key,hash:u.hash||''},location.origin); }
+  },true);
+})();</script>
 </body></html>

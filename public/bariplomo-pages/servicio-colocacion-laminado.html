@@ -331,10 +331,6 @@ body { padding-top:0 !important; }
 </div>
 </section>
 </main>
-<!-- WhatsApp FAB -->
-<a class="fixed bottom-8 right-8 bg-safety-yellow text-primary-container p-4 rounded-full shadow-lg hover:bg-tertiary-fixed transition-colors z-40 flex items-center justify-center" href="#">
-<span class="material-symbols-outlined text-3xl">chat</span>
-</a>
 <!-- Footer -->
 <footer class="bg-surface-container-highest w-full border-t border-outline-variant py-12 px-margin-mobile md:px-margin-desktop mt-auto">
 <div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-outline-variant pb-8 mb-8">
@@ -350,11 +346,11 @@ body { padding-top:0 !important; }
 <div class="flex-1 md:text-right space-y-4">
 <p class="font-label-sm text-label-sm text-secondary">ESTAS SON LAS REDES SOCIALES DE BARIPLOMO</p>
 <div class="flex gap-4 md:justify-end text-primary">
-<a class="hover:text-safety-yellow transition-colors" href="#"><span class="material-symbols-outlined text-2xl">video_library</span></a> <!-- YouTube proxy -->
-<a class="hover:text-safety-yellow transition-colors" href="#"><span class="material-symbols-outlined text-2xl">photo_camera</span></a> <!-- Instagram proxy -->
-<a class="hover:text-safety-yellow transition-colors" href="#"><span class="material-symbols-outlined text-2xl">thumb_up</span></a> <!-- Facebook proxy -->
-<a class="hover:text-safety-yellow transition-colors" href="#"><span class="material-symbols-outlined text-2xl">music_note</span></a> <!-- TikTok proxy -->
-<a class="hover:text-safety-yellow transition-colors" href="#"><span class="material-symbols-outlined text-2xl">storefront</span></a> <!-- Google Business proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.youtube.com/@bariplomorayosxblindajemx" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">video_library</span></a> <!-- YouTube proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.instagram.com/bariplomoblindaje/" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">photo_camera</span></a> <!-- Instagram proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.facebook.com/Bariplomo.Blindaje.Radiologico" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">thumb_up</span></a> <!-- Facebook proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.tiktok.com/@bariplomo.blindaj" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">music_note</span></a> <!-- TikTok proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://share.google/1JngXlWV6n6Y3yctr" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">storefront</span></a> <!-- Google Business proxy -->
 </div>
 </div>
 </div>
@@ -486,4 +482,19 @@ body { padding-top:0 !important; }
 })();
 </script>
 
+
+<a id="bariplomo-direct-whatsapp" href="https://wa.me/525528220554?text=Hola%20BARIPLOMO%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Business BARIPLOMO" style="display:none;position:fixed;right:22px;bottom:22px;z-index:99999;width:58px;height:58px;border-radius:50%;align-items:center;justify-content:center;background:#25D366;color:#fff;text-decoration:none;font:700 30px Arial;box-shadow:0 8px 24px rgba(0,0,0,.22);">⌕</a>
+<script>if(window.self===window.top){var w=document.getElementById('bariplomo-direct-whatsapp');if(w)w.style.display='flex';}</script>
+
+<script id="bariplomo-navigation-bridge-v2">(function(){
+  var map={
+    'index.html':'home','home.html':'home','materiales-barita-mortero.html':'materiales','materiales-plomo-pegamento.html':'plomo','productos-vidrio-puertas-mamparas.html':'productos','estudios-certificados.html':'estudios','servicio-aplicacion-baritado.html':'aplicacion','servicio-colocacion-laminado.html':'colocacion','cotizar.html':'cotizar'
+  };
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+    var u; try{u=new URL(a.href,location.href);}catch(_){return;}
+    var key=map[u.pathname.split('/').pop()]; if(!key) return;
+    if(window.parent && window.parent!==window){ e.preventDefault(); window.parent.postMessage({type:'bariplomo:navigate',page:key,hash:u.hash||''},location.origin); }
+  },true);
+})();</script>
 </body></html>

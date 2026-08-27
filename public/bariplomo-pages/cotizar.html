@@ -320,15 +320,6 @@ body { padding-top:0 !important; }
 </form>
 </div>
 </main>
-<!-- Floating WhatsApp Button -->
-<a class="fixed bottom-8 right-8 z-50 flex items-center gap-3 group" href="https://wa.me/5215555555555" rel="noopener" target="_blank">
-<div class="bg-surface-container-lowest border border-outline-variant px-4 py-2 rounded shadow-sm text-on-surface font-label-sm uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">
-            comunicate ahora con BARIPLOMO
-        </div>
-<div class="bg-emerald-500 text-pure-white p-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
-</div>
-</a>
 <!-- Footer -->
 <footer class="bg-surface-container-lowest border-t border-outline-variant w-full py-base px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
 <div class="flex flex-col items-center md:items-start gap-2">
@@ -449,4 +440,19 @@ body { padding-top:0 !important; }
 })();
 </script>
 
+
+<a id="bariplomo-direct-whatsapp" href="https://wa.me/525528220554?text=Hola%20BARIPLOMO%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Business BARIPLOMO" style="display:none;position:fixed;right:22px;bottom:22px;z-index:99999;width:58px;height:58px;border-radius:50%;align-items:center;justify-content:center;background:#25D366;color:#fff;text-decoration:none;font:700 30px Arial;box-shadow:0 8px 24px rgba(0,0,0,.22);">⌕</a>
+<script>if(window.self===window.top){var w=document.getElementById('bariplomo-direct-whatsapp');if(w)w.style.display='flex';}</script>
+
+<script id="bariplomo-navigation-bridge-v2">(function(){
+  var map={
+    'index.html':'home','home.html':'home','materiales-barita-mortero.html':'materiales','materiales-plomo-pegamento.html':'plomo','productos-vidrio-puertas-mamparas.html':'productos','estudios-certificados.html':'estudios','servicio-aplicacion-baritado.html':'aplicacion','servicio-colocacion-laminado.html':'colocacion','cotizar.html':'cotizar'
+  };
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+    var u; try{u=new URL(a.href,location.href);}catch(_){return;}
+    var key=map[u.pathname.split('/').pop()]; if(!key) return;
+    if(window.parent && window.parent!==window){ e.preventDefault(); window.parent.postMessage({type:'bariplomo:navigate',page:key,hash:u.hash||''},location.origin); }
+  },true);
+})();</script>
 </body></html>
