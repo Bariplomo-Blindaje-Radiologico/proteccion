@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Servicio Especializado: Colocación de Laminado de Plomo | BARIPLOMO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#131c28",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#261900",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#565f6e",
+                        "surface-variant": "#e0e3e5",
+                        "surface-dim": "#d8dadc",
+                        "tertiary-fixed-dim": "#edc063",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#3e4755",
+                        "on-primary-container": "#7b8494",
+                        "on-tertiary-container": "#a47e27",
+                        "tertiary-fixed": "#ffdea0",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#53647a",
+                        "surface": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#d3e4ff",
+                        "on-secondary": "#ffffff",
+                        "lead-gray": "#4A5568",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#45474c",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-container": "#d0e1fc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4f6076",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f8f9fb",
+                        "safety-yellow": "#DDB256",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "inverse-surface": "#2d3133",
+                        "pure-white": "#FFFFFF",
+                        "primary-fixed-dim": "#bec7d8",
+                        "background": "#f8f9fb",
+                        "secondary-fixed-dim": "#b7c8e2",
+                        "on-secondary-fixed-variant": "#37485d",
+                        "on-primary-fixed": "#131c28",
+                        "primary-fixed": "#dae3f4",
+                        "surface-container": "#eceef0",
+                        "outline-variant": "#c5c6cc",
+                        "tertiary-container": "#261900",
+                        "on-error": "#ffffff",
+                        "outline": "#75777c",
+                        "emergency-blue": "#0047AB",
+                        "on-secondary-fixed": "#0a1c30",
+                        "primary": "#000000",
+                        "inverse-primary": "#bec7d8",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .lightbox-open { overflow: hidden; }
+        .lightbox-backdrop {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+            backdrop-filter: blur(4px);
+        }
+        .lightbox-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .zoom-img {
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+        .zoom-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+
+<style id="bariplomo-global-nav">
+.bp-nav{position:sticky;top:0;z-index:9999;background:#fff;border-bottom:1px solid #c5c6cc;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.bp-nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.bp-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#000;flex-shrink:0}
+.bp-brand img{height:44px;width:auto;object-fit:contain}
+.bp-brand-text{font:700 16px Inter,Arial,sans-serif;letter-spacing:.02em}
+.bp-menu{display:flex;align-items:center;gap:4px;justify-content:center}
+.bp-item{position:relative}
+.bp-item>a,.bp-item>button{font:600 13px Inter,Arial,sans-serif;color:#4f6076;text-decoration:none;background:transparent;border:0;padding:12px 11px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.bp-item:hover>a,.bp-item:hover>button,.bp-item.active>a,.bp-item.active>button{color:#000;background:#f2f4f6}
+.bp-sub{position:absolute;top:100%;left:0;min-width:245px;background:#fff;border:1px solid #c5c6cc;border-radius:10px;box-shadow:0 14px 35px rgba(0,0,0,.12);padding:7px;display:none}
+.bp-item:hover .bp-sub,.bp-item:focus-within .bp-sub{display:block}
+.bp-sub a{display:block;padding:10px 12px;border-radius:7px;color:#45474c;text-decoration:none;font:500 13px Inter,Arial,sans-serif}
+.bp-sub a:hover{background:#f2f4f6;color:#000}
+.bp-cta{background:#0047AB!important;color:#fff!important;padding:11px 18px!important;border-radius:8px!important;font-weight:700!important}
+.bp-mobile-toggle{display:none;background:transparent;border:0;font-size:28px;color:#0047AB;cursor:pointer}
+.bp-mobile-menu{display:none;border-top:1px solid #e0e3e5;background:#fff;padding:10px 24px 18px}
+.bp-mobile-menu.open{display:block}
+.bp-mobile-menu details{border-bottom:1px solid #eceef0;padding:7px 0}
+.bp-mobile-menu summary{cursor:pointer;font:700 14px Inter,Arial,sans-serif;padding:8px 0}
+.bp-mobile-menu a{display:block;text-decoration:none;color:#45474c;font:500 13px Inter,Arial,sans-serif;padding:8px 10px}
+@media(max-width:900px){
+ .bp-nav-inner{min-height:68px;padding:0 16px}
+ .bp-menu{display:none}
+ .bp-mobile-toggle{display:block}
+ .bp-brand img{height:38px}
+ .bp-brand-text{display:none}
+}
+.bp-active-label{position:absolute;inset:auto 0 -2px 0;height:2px;background:#0047AB}
+</style>
+<style id="bariplomo-technical-viewer">
+/* BARIPLOMO technical-sheet viewer */
+.bp-sheet-wrap{position:relative;display:block;max-width:100%;overflow:hidden;cursor:zoom-in;background:#f4f6f8}
+.bp-sheet{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.bp-viewer{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(3,10,18,.94)}
+.bp-viewer.is-open{display:flex}
+.bp-viewer-panel{position:relative;width:min(96vw,1500px);height:min(94vh,1000px);display:flex;align-items:center;justify-content:center}
+.bp-viewer-panel img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.bp-viewer-close{position:absolute;right:0;top:-8px;z-index:2;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:28px;line-height:1;cursor:pointer}
+.bp-viewer-help{position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);color:#fff;font:500 12px Inter,Arial,sans-serif;opacity:.75;white-space:nowrap}
+@media(max-width:700px){.bp-viewer{padding:12px}.bp-viewer-panel{width:98vw;height:92vh}.bp-viewer-help{bottom:-20px;font-size:10px}}
+</style>
+
+<style id="bariplomo-stable-layout">
+html,body{height:auto!important;min-height:0!important;margin:0!important;overflow-x:hidden!important;}
+main{min-height:0!important;}
+footer{margin-bottom:0!important;}
+</style>
+
+<style id="bariplomo-whatsapp-float-style">
+.bp-whatsapp-float{position:fixed;right:22px;bottom:22px;z-index:100000;width:62px;height:62px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .2s ease,box-shadow .2s ease;font-family:Arial,sans-serif;font-weight:700}
+.bp-whatsapp-float:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.28)}
+.bp-whatsapp-float:focus-visible{outline:3px solid #0047AB;outline-offset:3px}
+.bp-whatsapp-float svg{width:32px;height:32px;display:block;fill:currentColor}
+@media(max-width:700px){.bp-whatsapp-float{right:16px;bottom:16px;width:56px;height:56px}.bp-whatsapp-float svg{width:29px;height:29px}}
+</style>
+</head>
+<body class="bg-background text-on-background flex flex-col">
+<!-- TopNavBar -->
+
+<nav aria-label="Navegación principal" class="bp-nav">
+<div class="bp-nav-inner">
+<a class="bp-brand" href="/bariplomo-pages/home.html">
+<img alt="BARIPLOMO" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATg7UHA5v-FMITYFqe3JeSnm1mrdRgcHwfXHt8-lLx5M9C-j_e8qsOR9BItT2dJ6XJwxbE-pmWIH1lX97R9wCiESgZjGEBboGdSG7OibdxaxFDJoJFXkfHUmH0YVz2nbroqAXq2B1hnNFqz2FWoHXQckyWvuMCq-8l8i89lt-1yrboP-NsugmBIupGco9PZadyluv38ORoWO7TTVY5OvB810wowlAI0J4ohSaE1ASDkqQ7IOGFpo6ttkfH8odvW5Dozg"/>
+<span class="bp-brand-text">BARIPLOMO</span>
+</a>
+<div class="bp-menu">
+<div class="bp-item"><button type="button">MATERIALES</button>
+<div class="bp-sub">
+<a href="/bariplomo-pages/materiales-barita-mortero.html#barita">Barita de Plomo</a>
+<a href="/bariplomo-pages/materiales-barita-mortero.html#mortero">Mortero Mezcla de Barita</a>
+<a href="/bariplomo-pages/materiales-plomo-pegamento.html#hoja-plomo">Hoja / Lámina / Placa de Plomo</a>
+<a href="/bariplomo-pages/materiales-plomo-pegamento.html#pegamento">Pegamento para colocar Plomo</a>
+</div>
+</div>
+<div class="bp-item"><button type="button">PRODUCTOS</button>
+<div class="bp-sub">
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#vidrio">Vidrio Plomoso</a>
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#puerta">Puerta Emplomada</a>
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#mampara">Mampara Emplomada</a>
+</div>
+</div>
+<div class="bp-item"><button type="button">ESTUDIOS CERTIFICADOS</button>
+<div class="bp-sub">
+<a href="/bariplomo-pages/estudios-certificados.html#memoria">Memoria Analítica</a>
+<a href="/bariplomo-pages/estudios-certificados.html#levantamiento">Levantamiento de Niveles</a>
+</div>
+</div>
+<div class="bp-item active"><button type="button">SERVICIOS</button>
+<div class="bp-sub">
+<a href="/bariplomo-pages/servicio-aplicacion-baritado.html#aplicacion">Aplicación de Baritado</a>
+<a href="/bariplomo-pages/servicio-colocacion-laminado.html#colocacion">Colocación de Laminado</a>
+</div>
+</div>
+<a class="bp-cta" href="/bariplomo-pages/cotizar.html">COTIZAR</a>
+</div>
+<button aria-label="Abrir menú" class="bp-mobile-toggle" data-bp-mobile-toggle="">☰</button>
+</div>
+<div class="bp-mobile-menu" data-bp-mobile-menu="">
+<details><summary>MATERIALES</summary>
+<a href="/bariplomo-pages/materiales-barita-mortero.html#barita">Barita de Plomo</a>
+<a href="/bariplomo-pages/materiales-barita-mortero.html#mortero">Mortero Mezcla de Barita</a>
+<a href="/bariplomo-pages/materiales-plomo-pegamento.html#hoja-plomo">Hoja / Lámina / Placa de Plomo</a>
+<a href="/bariplomo-pages/materiales-plomo-pegamento.html#pegamento">Pegamento para colocar Plomo</a>
+</details>
+<details><summary>PRODUCTOS</summary>
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#vidrio">Vidrio Plomoso</a>
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#puerta">Puerta Emplomada</a>
+<a href="/bariplomo-pages/productos-vidrio-puertas-mamparas.html#mampara">Mampara Emplomada</a>
+</details>
+<details><summary>ESTUDIOS CERTIFICADOS</summary>
+<a href="/bariplomo-pages/estudios-certificados.html#memoria">Memoria Analítica</a>
+<a href="/bariplomo-pages/estudios-certificados.html#levantamiento">Levantamiento de Niveles</a>
+</details>
+<details><summary>SERVICIOS</summary>
+<a href="/bariplomo-pages/servicio-aplicacion-baritado.html#aplicacion">Aplicación de Baritado</a>
+<a href="/bariplomo-pages/servicio-colocacion-laminado.html#colocacion">Colocación de Laminado</a>
+</details>
+<a href="/bariplomo-pages/cotizar.html" style="display:inline-block;margin-top:12px;background:#0047AB;color:#fff;padding:10px 15px;border-radius:8px;font-weight:700">COTIZAR</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col gap-16">
+<!-- Hero Section -->
+<section class="text-center max-w-4xl mx-auto space-y-6" id="colocacion">
+<h1 class="font-display-lg text-display-lg text-primary">Servicio Especializado: Colocación de Laminado de Plomo</h1>
+<p class="font-body-lg text-body-lg text-secondary">Instalación profesional de grado médico para máxima protección radiológica en muros, techos y pisos.</p>
+</section>
+<!-- Technical Guide Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-start">
+<div class="space-y-6 bg-surface-container-lowest p-8 rounded border border-outline-variant shadow-sm">
+<div class="flex items-center gap-3 border-b border-outline-variant pb-4">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Guía Técnica de Instalación</h2>
+</div>
+<p class="font-body-md text-body-md text-secondary">
+                    Nuestro proceso de instalación sigue un protocolo secuencial riguroso para asegurar la integridad del blindaje. Desde la medición milimétrica hasta la inspección final, cada paso está diseñado para garantizar la seguridad total del entorno radiológico.
+                </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-safety-yellow mt-1">check_circle</span>
+<div>
+<strong class="font-title-md text-title-md text-on-surface block">Muros</strong>
+<span class="font-body-md text-body-md text-secondary">Aplicación de adhesivo especializado, colocación y sellado hermético con traslape mínimo.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-safety-yellow mt-1">check_circle</span>
+<div>
+<strong class="font-title-md text-title-md text-on-surface block">Techos</strong>
+<span class="font-body-md text-body-md text-secondary">Elevación segura y fijación con presión uniforme, asegurando adherencia total.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-safety-yellow mt-1">check_circle</span>
+<div>
+<strong class="font-title-md text-title-md text-on-surface block">Pisos</strong>
+<span class="font-body-md text-body-md text-secondary">Nivelación perfecta y uso de adhesivos de alta resistencia para tráfico.</span>
+</div>
+</li>
+</ul>
+</div>
+<div class="relative group cursor-zoom-in" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuB6xsaSy3HbO2cHJEFn27XOeo0c_DvOyNCjZqj97uK4UU9xJ9GwcdNf3JwFFxXMWL8Mq6XP1KvQukzVKE3H8Gs34TcXABvfxu0t9m6KzVfuO4j3jZxCo47vmOvFMj5GWa8iaFmOFXuz9RlrySIAklbTSqw9K21R-sLqwxhVk4mkiwjwozPTsFRGWndvYWkpzsndKlmOxmOie2UAfI3-7UAVcDT3PAXI9CZ2fVTLWgfRvfVpLFKzGZXYbO94W8zr6Pc5OA', 'Ficha Técnica: Servicio Especializado Colocación de Laminado de Plomo - BARIPLOMO')">
+<div class="bp-sheet-wrap"><img class="w-full h-auto rounded border border-outline-variant zoom-img object-contain bg-surface-container-low bp-sheet" data-alt="Ficha Técnica: Servicio Especializado Colocación de Laminado de Plomo - BARIPLOMO" draggable="false" src="/bariplomo-pages/assets/fichas/colocacion.png" style="max-height: 600px;"/></div>
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded pointer-events-none flex items-center justify-center">
+<span class="material-symbols-outlined text-pure-white text-5xl drop-shadow-md">zoom_in</span>
+</div>
+</div>
+</section>
+<!-- Quality & Safety Section -->
+<section class="bg-surface-container-low p-8 md:p-12 rounded border border-outline-variant">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Ejecución Profesional Certificada</h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-3xl mx-auto">Cumplimos estrictamente con las normativas internacionales y nacionales (NOM-229-SSA1-2002) asegurando blindaje confiable en entornos hospitalarios e industriales.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="relative group cursor-zoom-in" onclick="openLightbox('placeholder', 'Operarios con equipo de protección personal instalando panel de plomo en muro de sala de rayos X, mostrando precisión y seguridad industrial.')">
+<img class="w-full h-64 object-cover rounded border border-outline-variant zoom-img" data-alt="Operarios con equipo de protección personal instalando panel de plomo en muro de sala de rayos X, mostrando precisión y seguridad industrial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCScEuzgTBJel7d0tgTbGMsVbltagOCP9Ww8BiSzVpRnDTH2W5YdxC17j-aNkkqU0bhmUJr6kETCNixKVSeF28zx9hdSoa7KmrfItpwotthoRIp7QKwAiWHpB9-pIDoInhtMceUPzMWeN8QqbFH5BlzZGP7UMD8JKwbosRL4gJylSPemKd9Dh7VSYfi3UdJHrlnof4hPS7VacXlu6EhJ6bcnEOh7lqLTtM0Y2rCij7D4ldj6lSjEmqe"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity rounded pointer-events-none"></div>
+</div>
+<div class="relative group cursor-zoom-in" onclick="openLightbox('placeholder', 'Diferentes aplicaciones industriales y hospitalarias del blindaje de plomo, incluyendo salas de investigación y puertas radiológicas.')">
+<img class="w-full h-64 object-cover rounded border border-outline-variant zoom-img" data-alt="Diferentes aplicaciones industriales y hospitalarias del blindaje de plomo, incluyendo salas de investigación y puertas radiológicas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo3cDdgBSq-nr4PqqbAdpdEFd4Ke_oQ78BE7BQRDQJ0ysZ3wPkgYt5JJnUTTric5sk-x974BL1tZd1VFJW9KRBHInDIAt00RMHIKOuTqrpzMhZZHQ2IgqlVH3S80v5wAnJ7B-RdQh-XqYET9vMZ85JEwtEzNlaRCu9luBu7KvkaRy5b6fwKYhSxwHX1ixu3SpfLn5gGGM3W6JvVkygoebkq7ULdbZyX_ailuZ690eDr06CsxrzqhC1"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity rounded pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Interactive Video Section -->
+<section class="space-y-8">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center">Procedimientos en Acción</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-4xl mx-auto">
+<a class="block group relative rounded overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest" href="https://www.youtube.com/shorts/VduRYUPxtV8" target="_blank"><div class="aspect-[9/16] bg-surface-variant flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQuUVc8j8EKfVJCd9xCmPESdUHV5FYfyZlWD3TBG4uJGPrSj0CupBjjcy6S2X9mf0AHaJSQnaYboPGn6Ispv9icraCnHySkXJBwzqgm0M47L5V20o3DocH0bUEhepvyGBndxrkTNbv_NOIDL5wVgVnt5BkH1MkBvcLw9X73Xzrq2YG6PUjo44b0emQ-wu02Gd18H-Z0OE2dudR9u08sD_wl63FqIrqVv2QB3tN263C-8bNJ0SW6tPi')"></div><div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors"></div><span class="material-symbols-outlined text-pure-white text-6xl drop-shadow-lg z-10" style="font-variation-settings: 'FILL' 1;">play_circle</span></div><div class="p-4 bg-surface-container-lowest border-t border-outline-variant"><p class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Demostración: Colocación en Muros</p></div></a>
+<a class="block group relative rounded overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest" href="https://www.youtube.com/shorts/JQQWN7QsY3c" target="_blank"><div class="aspect-[9/16] bg-surface-variant flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxR-hy9Hcxv6Q_MZr64iP99blXc3wZsZPUYwvklWjO8HZXRpI3kMsZGBhFGd2c3FibIoEGhszDnwKN7mXufjjjf0EU95S6dyhg_XbRW2WbvDM_0ywIVHLOf04qOl2WxSWBTO6TbFlcB-KPFBJKM-lfhQqrXG38aeBOlESEGXx6XU9uaZxLQBnXNx12wDjaCNac86Lm4eMxsIvAB1zw6OK4faQkqVY2bEN9kCarRFMbmLzJtc5hh-vE')"></div><div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors"></div><span class="material-symbols-outlined text-pure-white text-6xl drop-shadow-lg z-10" style="font-variation-settings: 'FILL' 1;">play_circle</span></div><div class="p-4 bg-surface-container-lowest border-t border-outline-variant"><p class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Detalle Técnico: Traslapes Seguros</p></div></a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full border-t border-outline-variant py-12 px-margin-mobile md:px-margin-desktop mt-auto">
+<div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-outline-variant pb-8 mb-8">
+<div class="flex-1 space-y-2">
+<img alt="BARIPLOMO Logo" class="h-8 w-auto mb-4 opacity-80 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMaCd_FTKFWE0SdRq5dx70Jnrv_JtpICcPASBV2D1KNqSJDcCW1TGDCh2vZf_jgmhwUudkYy_BYNDHjRA7FVgcC1E1AVpmZpZ9DTsi1o_vQoiHxBJahc8cpK4LeXe7B7QHkzX2M56q9KpsC2geZRk1b85fUpzR-VSEjWwcVpdPQA0rIeqP6_L821fRC1l_geT_SGCn3Vggn3H8T-hUBTDtxT8kKbrZbBAcZCqpOCTXDlid0__l71lGSK6UY6Lmsh0c5Q"/>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Tlalnepantla, Estado de México</p>
+<p class="font-label-sm text-label-sm text-secondary bg-surface-variant inline-block px-2 py-1 rounded">ENVIOS A TODA LA REPUBLICA MEXICANA</p>
+</div>
+<div class="flex-1 text-center md:border-l md:border-r border-outline-variant px-4">
+<p class="font-label-sm text-label-sm text-secondary mb-1">Visitas de Profesionales</p>
+<p class="font-display-lg text-display-lg font-bold text-primary tracking-widest">042,851</p>
+</div>
+<div class="flex-1 md:text-right space-y-4">
+<p class="font-label-sm text-label-sm text-secondary">ESTAS SON LAS REDES SOCIALES DE BARIPLOMO</p>
+<div class="flex gap-4 md:justify-end text-primary">
+<a class="hover:text-safety-yellow transition-colors" href="https://www.youtube.com/@bariplomorayosxblindajemx" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">video_library</span></a> <!-- YouTube proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.instagram.com/bariplomoblindaje/" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">photo_camera</span></a> <!-- Instagram proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.facebook.com/Bariplomo.Blindaje.Radiologico" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">thumb_up</span></a> <!-- Facebook proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://www.tiktok.com/@bariplomo.blindaj" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">music_note</span></a> <!-- TikTok proxy -->
+<a class="hover:text-safety-yellow transition-colors" href="https://share.google/1JngXlWV6n6Y3yctr" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-2xl">storefront</span></a> <!-- Google Business proxy -->
+</div>
+</div>
+</div>
+<div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-secondary">BARIPLOMO - Blindaje Radiológico Profesional.</p>
+<div class="flex gap-6 font-body-md text-body-md text-secondary">
+<a class="hover:underline decoration-primary" href="#">Privacidad</a>
+<a class="hover:underline decoration-primary" href="#">Términos</a>
+<a class="hover:underline decoration-primary" href="/bariplomo-pages/cotizar.html">Contacto</a>
+<a class="hover:underline decoration-primary" href="#">Soporte Técnico</a>
+</div>
+</div>
+</footer>
+<!-- Lightbox Modal -->
+<div class="lightbox-backdrop fixed inset-0 z-[60] bg-primary-container/90 flex items-center justify-center p-4 md:p-12" id="lightbox">
+<button class="absolute top-6 right-6 text-pure-white hover:text-safety-yellow transition-colors" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<img alt="Vista ampliada" class="max-w-full max-h-full object-contain rounded shadow-2xl" id="lightbox-img" src=""/>
+</div>
+<script>
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            img.alt = alt;
+            lightbox.classList.add('active');
+            document.body.classList.add('lightbox-open');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-open');
+        }
+
+        // Close lightbox on escape key or clicking outside
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        });
+    </script>
+<script>
+(function(){
+  function initSheetViewer(){
+    var modal=document.getElementById('bp-viewer');
+    if(!modal){
+      modal=document.createElement('div'); modal.id='bp-viewer'; modal.className='bp-viewer'; modal.setAttribute('role','dialog'); modal.setAttribute('aria-modal','true');
+      modal.innerHTML='<div class="bp-viewer-panel"><button class="bp-viewer-close" type="button" aria-label="Cerrar">×</button><img alt=""><div class="bp-viewer-help">Haz clic fuera de la ficha o en × para cerrar</div></div>';
+      document.body.appendChild(modal);
+    }
+    var modalImg=modal.querySelector('img');
+    function close(){modal.classList.remove('is-open');modalImg.removeAttribute('src');document.body.style.overflow='';}
+    document.querySelectorAll('img.bp-sheet').forEach(function(img){
+      img.addEventListener('contextmenu',function(e){e.preventDefault();});
+      img.addEventListener('dragstart',function(e){e.preventDefault();});
+      img.addEventListener('click',function(){
+        modalImg.src=img.currentSrc||img.src; modalImg.alt=img.alt||'Ficha técnica BARIPLOMO'; modal.classList.add('is-open'); document.body.style.overflow='hidden';
+      });
+    });
+    modal.querySelector('.bp-viewer-close').addEventListener('click',close);
+    modal.addEventListener('click',function(e){if(e.target===modal) close();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape' && modal.classList.contains('is-open')) close();});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initSheetViewer); else initSheetViewer();
+})();
+</script>
+
+<script id="bariplomo-mobile-navigation">
+(function(){
+  var toggle=document.querySelector('[data-bp-mobile-toggle]');
+  var menu=document.querySelector('[data-bp-mobile-menu]');
+  if(!toggle||!menu) return;
+  toggle.addEventListener('click',function(){
+    menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',menu.classList.contains('open')?'true':'false');
+  });
+})();
+</script>
+
+<a class="bp-whatsapp-float" href="https://wa.me/525528220554?text=Hola%20BARIPLOMO%2C%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa." target="_blank" rel="noopener noreferrer" aria-label="Contactar a BARIPLOMO por WhatsApp">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.09.02C5.55.02.23 5.34.23 11.88c0 2.09.55 4.13 1.59 5.93L.12 23.88l6.2-1.62a11.84 11.84 0 0 0 5.77 1.49h.01c6.54 0 11.86-5.32 11.86-11.86 0-3.17-1.23-6.14-3.44-8.41ZM12.1 21.74h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.68.96.98-3.59-.23-.37a9.83 9.83 0 0 1-1.51-5.28C2.27 6.45 6.67 2.05 12.1 2.05c2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.43-4.41 9.83-9.84 9.83Zm5.39-7.37c-.29-.15-1.71-.84-1.98-.94-.27-.1-.47-.15-.67.15-.2.29-.77.94-.94 1.13-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.91-2.2-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.01-1.04 2.46s1.07 2.85 1.22 3.05c.15.2 2.11 3.22 5.11 4.51.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.71-.7 1.95-1.37.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.56-.35Z"/></svg>
+</a>
+</body></html>
