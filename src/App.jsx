@@ -82,69 +82,58 @@ function App() {
   const frame = iframeRef.current;
   if (!frame) return;
 
-  // Reiniciar inmediatamente la altura al cambiar de página
-  frame.style.height = '1px';
-
   const onLoad = () => {
     try {
       const doc = frame.contentDocument;
-      if (!doc?.documentElement || !doc.body) return;
+      if (!doc?.body) return;
 
-      // Eliminar cualquier regla anterior que pudiera alterar la altura
-      const oldStyle = doc.getElementById('bariplomo-shell-normalize');
-      if (oldStyle) oldStyle.remove();
+      if (!doc.getElementById('bariplomo-shell-normalize')) {
+        const style = doc.createElement('style');
+        style.id = 'bariplomo-shell-normalize';
 
-      // Evitar alturas artificiales dentro de las páginas
-      const style = doc.createElement('style');
-      style.id = 'bariplomo-shell-normalize';
-      style.textContent = `
-        html,
-        body {
-          height: auto !important;
-          min-height: 0 !important;
-          max-height: none !important;
-        }
-
-        body {
-          overflow-x: hidden !important;
-        }
-
-        main {
-          min-height: 0 !important;
-        }
-      `;
-
-      doc.head.appendChild(style);
-
-      // Esperar a que el navegador termine de acomodar el contenido
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const height = Math.max(
-            doc.body.scrollHeight,
-            doc.body.offsetHeight,
-            doc.documentElement.scrollHeight,
-            doc.documentElement.offsetHeight
-          );
-
-          if (Number.isFinite(height) && height > 0) {
-            frame.style.height = `${Math.ceil(height)}px`;
+        style.textContent = `
+          html,
+          body {
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
           }
 
-          const hash = new URL(frame.src, window.location.origin).hash;
-
-          if (hash) {
-            requestAnimationFrame(() => {
-              scrollFrameToHash(hash);
-            });
+          body {
+            overflow-x: hidden !important;
           }
-        });
-      });
+
+          .bp-nav,
+          .bp-mobile-menu {
+            display: none !important;
+          }
+
+          main {
+            min-height: 0 !important;
+            height: auto !important;
+          }
+        `;
+
+        doc.head.appendChild(style);
+      }
+
+      const height = Math.max(
+        doc.body.scrollHeight,
+        doc.documentElement.scrollHeight
+      );
+
+      frame.style.height = `${height}px`;
+
+      const hash = new URL(frame.src, window.location.origin).hash;
+
+      if (hash) {
+        requestAnimationFrame(() => scrollFrameToHash(hash));
+      }
     } catch (_) {}
   };
 
   frame.addEventListener('load', onLoad);
 
-  // Si el documento ya terminó de cargar
   if (frame.contentDocument?.readyState === 'complete') {
     onLoad();
   }
@@ -153,8 +142,7 @@ function App() {
     frame.removeEventListener('load', onLoad);
   };
 }, [page, scrollFrameToHash]);
-    frame.removeEventListener('load', onLoad);
-  };
+  
 }, [page, scrollFrameToHash]);
 
   return (
