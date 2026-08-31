@@ -125,49 +125,61 @@ function App() {
     };
 
     const measure = () => {
-      try {
-        const doc = frame.contentDocument;
-        if (!doc?.documentElement || !doc.body) return;
-        // The embedded pages contain their own responsive nav/min-height rules.
-        // The React shell owns the navigation, so remove the duplicate embedded nav
-        // and all viewport-based minimum heights before measuring the real content.
-        if (!doc.getElementById('bariplomo-shell-normalize')) {
-          const style = doc.createElement('style');
-          style.id = 'bariplomo-shell-normalize';
-          style.textContent = `
-            html, body { min-height: 0 !important; height: auto !important; }
-            body { overflow-x: hidden !important; }
-            .bp-nav { display: none !important; }
-            .bp-mobile-menu { display: none !important; }
-            main { min-height: 0 !important; }
-            [class*="h-[80vh]"], [class*="h-[90vh]"] {
-              height: 560px !important;
-              min-height: 0 !important;
-            }
-            [class*="min-h-screen"] { min-height: 0 !important; }
-          `;
-          doc.head.appendChild(style);
+  try {
+    const doc = frame.contentDocument;
+    if (!doc?.documentElement || !doc.body) return;
+
+    if (!doc.getElementById('bariplomo-shell-normalize')) {
+      const style = doc.createElement('style');
+      style.id = 'bariplomo-shell-normalize';
+
+      style.textContent = `
+        html, body {
+          min-height: 0 !important;
+          height: auto !important;
         }
-        const body = doc.body;
 
-        // Do NOT use html.getBoundingClientRect().height here: inside an iframe
-        // it equals the iframe viewport. That creates a circular 90vh -> iframe
-        // height -> 90vh expansion and produces an apparently infinite page.
-        // Measure the real document content instead.
-        let contentBottom = 0;
-        Array.from(body.children).forEach((el) => {
-          if (!el || typeof el.getBoundingClientRect !== 'function') return;
-          const rect = el.getBoundingClientRect();
-          if (getComputedStyle(el).position === 'fixed') return;
-          contentBottom = Math.max(contentBottom, rect.bottom + window.scrollY);
-        });
+        body {
+          overflow-x: hidden !important;
+        }
 
-        const height = Math.ceil(Math.max(contentBottom, 1));
-        if (height > 0) frame.style.height = `${height}px`;
-      } catch (_) {}
-    };
+        .bp-nav,
+        .bp-mobile-menu {
+          display: none !important;
+        }
 
-    const scheduleMeasure = () => {
+        main {
+          min-height: 0 !important;
+        }
+
+        [class*="min-h-screen"],
+        [class*="h-[80vh]"],
+        [class*="h-[90vh]"] {
+          min-height: 0 !important;
+          height: auto !important;
+        }
+      `;
+
+      doc.head.appendChild(style);
+    }
+
+    // Medimos únicamente el contenido real del documento.
+    // Nunca usamos la altura del iframe como referencia.
+    const html = doc.documentElement;
+    const body = doc.body;
+
+    const height = Math.max(
+      html.scrollHeight,
+      html.offsetHeight,
+      body.scrollHeight,
+      body.offsetHeight
+    );
+
+    if (Number.isFinite(height) && height > 0) {
+      frame.style.height = `${Math.ceil(height)}px`;
+    }
+  } catch (_) {}
+};
       window.clearTimeout(resizeTimerRef.current);
       resizeTimerRef.current = window.setTimeout(measure, 30);
     };
