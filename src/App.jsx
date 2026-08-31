@@ -85,7 +85,7 @@ function App() {
   const onLoad = () => {
     try {
       const doc = frame.contentDocument;
-      if (!doc?.body) return;
+      if (!doc?.documentElement || !doc.body) return;
 
       if (!doc.getElementById('bariplomo-shell-normalize')) {
         const style = doc.createElement('style');
@@ -110,6 +110,12 @@ function App() {
 
           main {
             min-height: 0 !important;
+          }
+
+          [class*="min-h-screen"],
+          [class*="h-[80vh]"],
+          [class*="h-[90vh]"] {
+            min-height: 0 !important;
             height: auto !important;
           }
         `;
@@ -117,17 +123,26 @@ function App() {
         doc.head.appendChild(style);
       }
 
-      const height = Math.max(
-        doc.body.scrollHeight,
-        doc.documentElement.scrollHeight
-      );
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const bodyHeight = doc.body.scrollHeight;
+          const htmlHeight = doc.documentElement.scrollHeight;
+          const height = Math.max(bodyHeight, htmlHeight);
 
-      frame.style.height = `${height}px`;
+          if (Number.isFinite(height) && height > 0) {
+            frame.style.height = `${Math.ceil(height)}px`;
+          }
+        });
+      });
 
       const hash = new URL(frame.src, window.location.origin).hash;
 
       if (hash) {
-        requestAnimationFrame(() => scrollFrameToHash(hash));
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollFrameToHash(hash);
+          });
+        });
       }
     } catch (_) {}
   };
@@ -142,10 +157,6 @@ function App() {
     frame.removeEventListener('load', onLoad);
   };
 }, [page, scrollFrameToHash]);
-  
-}, [page, scrollFrameToHash]);
-
-  return (
     <div className="site-shell">
       <header className="site-header">
         <a className="brand" href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }} aria-label="BARIPLOMO inicio">
