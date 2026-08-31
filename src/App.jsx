@@ -79,140 +79,87 @@ function App() {
   }, [page, scrollFrameToHash]);
 
   useEffect(() => {
-    const onMessage = (event) => {
-      if (event.source !== iframeRef.current?.contentWindow) return;
-      if (event.origin !== window.location.origin) return;
-      const data = event.data || {};
-      if (data.type === 'bariplomo:navigate' && pages[data.page]) {
-        navigate(data.page, data.hash || '');
+  const frame = iframeRef.current;
+  if (!frame) return;
+
+  const onLoad = () => {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc?.documentElement || !doc.body) return;
+
+      if (!doc.getElementById('bariplomo-shell-normalize')) {
+        const style = doc.createElement('style');
+        style.id = 'bariplomo-shell-normalize';
+
+        style.textContent = `
+          html,
+          body {
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+          }
+
+          body {
+            overflow-x: hidden !important;
+          }
+
+          .bp-nav,
+          .bp-mobile-menu {
+            display: none !important;
+          }
+
+          main {
+            min-height: 0 !important;
+          }
+
+          [class*="min-h-screen"],
+          [class*="h-[80vh]"],
+          [class*="h-[90vh]"] {
+            min-height: 0 !important;
+            height: auto !important;
+          }
+        `;
+
+        doc.head.appendChild(style);
       }
-    };
-    const onPopState = () => {
-      const key = getRoute();
-      if (pages[key]) {
-        const hash = window.location.hash.split('#').slice(2).join('#');
-        requestedHashRef.current = hash ? `#${hash}` : '';
-        setPage(key);
-        setMobileOpen(false);
-        if (iframeRef.current && key === page) {
-          iframeRef.current.src = `${pages[key]}${hash ? `#${hash}` : ''}`;
-        }
-      }
-    };
-    window.addEventListener('message', onMessage);
-    window.addEventListener('popstate', onPopState);
-    return () => {
-      window.removeEventListener('message', onMessage);
-      window.removeEventListener('popstate', onPopState);
-    };
-  }, [navigate]);
 
-  useEffect(() => {
-    const frame = iframeRef.current;
-    if (!frame) return;
-    const hash = requestedHashRef.current || '';
-    requestedHashRef.current = '';
-    frame.src = `${currentSrc}${hash}`;
-  }, [currentSrc]);
+      /*
+       * IMPORTANTE:
+       * No usamos ResizeObserver.
+       * No hacemos mediciones repetitivas.
+       * La altura del iframe se establece una sola vez.
+       */
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const bodyHeight = doc.body.scrollHeight;
+          const htmlHeight = doc.documentElement.scrollHeight;
 
-  useEffect(() => {
-    const frame = iframeRef.current;
-    if (!frame) return;
+          const height = Math.max(bodyHeight, htmlHeight);
 
-    const cleanupObserver = () => {
-      resizeObserverRef.current?.disconnect();
-      resizeObserverRef.current = null;
-    };
-
-    const measure = () => {
-  try {
-    const doc = frame.contentDocument;
-    if (!doc?.documentElement || !doc.body) return;
-
-    if (!doc.getElementById('bariplomo-shell-normalize')) {
-      const style = doc.createElement('style');
-      style.id = 'bariplomo-shell-normalize';
-
-      style.textContent = `
-        html, body {
-          min-height: 0 !important;
-          height: auto !important;
-        }
-
-        body {
-          overflow-x: hidden !important;
-        }
-
-        .bp-nav,
-        .bp-mobile-menu {
-          display: none !important;
-        }
-
-        main {
-          min-height: 0 !important;
-        }
-
-        [class*="min-h-screen"],
-        [class*="h-[80vh]"],
-        [class*="h-[90vh]"] {
-          min-height: 0 !important;
-          height: auto !important;
-        }
-      `;
-
-      doc.head.appendChild(style);
-    }
-
-    // Medimos únicamente el contenido real del documento.
-    // Nunca usamos la altura del iframe como referencia.
-    const html = doc.documentElement;
-    const body = doc.body;
-
-    const height = Math.max(
-      html.scrollHeight,
-      html.offsetHeight,
-      body.scrollHeight,
-      body.offsetHeight
-    );
-
-    if (Number.isFinite(height) && height > 0) {
-      frame.style.height = `${Math.ceil(height)}px`;
-    }
-  } catch (_) {}
-};
-      window.clearTimeout(resizeTimerRef.current);
-      resizeTimerRef.current = window.setTimeout(measure, 30);
-    };
-
-    const onLoad = () => {
-      cleanupObserver();
-      measure();
-      const hash = new URL(frame.src, window.location.origin).hash;
-      if (hash) {
-        requestAnimationFrame(() => requestAnimationFrame(() => scrollFrameToHash(hash)));
-      }
-      try {
-        const doc = frame.contentDocument;
-        if (doc?.documentElement) {
-          resizeObserverRef.current = new ResizeObserver(scheduleMeasure);
-          resizeObserverRef.current.observe(doc.documentElement);
-          resizeObserverRef.current.observe(doc.body);
-        }
-        // Images and web fonts can change the document height after load.
-        doc?.querySelectorAll('img').forEach(img => {
-          if (!img.complete) img.addEventListener('load', scheduleMeasure, { once: true });
+          if (Number.isFinite(height) && height > 0) {
+            frame.style.height = `${Math.ceil(height)}px`;
+          }
         });
-      } catch (_) {}
-      [100, 300, 800, 1500].forEach(ms => window.setTimeout(measure, ms));
-    };
+      });
 
-    frame.addEventListener('load', onLoad);
-    return () => {
-      frame.removeEventListener('load', onLoad);
-      cleanupObserver();
-      window.clearTimeout(resizeTimerRef.current);
-    };
-  }, [page, scrollFrameToHash]);
+      const hash = new URL(frame.src, window.location.origin).hash;
+
+      if (hash) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollFrameToHash(hash);
+          });
+        });
+      }
+    } catch (_) {}
+  };
+
+  frame.addEventListener('load', onLoad);
+
+  return () => {
+    frame.removeEventListener('load', onLoad);
+  };
+}, [page, scrollFrameToHash]);
 
   return (
     <div className="site-shell">
