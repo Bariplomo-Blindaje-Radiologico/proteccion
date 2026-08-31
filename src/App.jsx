@@ -69,29 +69,58 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const frame = iframeRef.current;
-    if (!frame) return;
-    const resize = () => {
-      try {
-        const doc = frame.contentDocument;
-        const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-        frame.style.height = `${height + 8}px`;
-      } catch (_) {}
-    };
-    const onLoad = () => {
-      resize();
-      try {
-        const observer = new ResizeObserver(resize);
-        observer.observe(frame.contentDocument.documentElement);
-        frame._bariplomoObserver = observer;
-      } catch (_) {}
-    };
-    frame.addEventListener('load', onLoad);
-    return () => {
-      frame.removeEventListener('load', onLoad);
-      frame._bariplomoObserver?.disconnect();
-    };
-  }, [currentSrc]);
+  const frame = iframeRef.current;
+  if (!frame) return;
+
+  const resize = () => {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc || !doc.body) return;
+
+      const height = Math.max(
+        doc.body.offsetHeight,
+        doc.body.scrollHeight,
+        doc.documentElement.offsetHeight
+      );
+
+      frame.style.height = `${height + 8}px`;
+    } catch (_) {}
+  };
+
+  const onLoad = () => {
+    // Reiniciar la altura al cambiar de página
+    frame.style.height = '100px';
+
+    resize();
+
+    // Esperar a que terminen de cargar imágenes,
+    // fuentes y otros elementos de la página.
+    setTimeout(resize, 100);
+    setTimeout(resize, 500);
+    setTimeout(resize, 1000);
+
+    try {
+      const doc = frame.contentDocument;
+      if (!doc) return;
+
+      const observer = new ResizeObserver(() => {
+        resize();
+      });
+
+      observer.observe(doc.body);
+      observer.observe(doc.documentElement);
+
+      frame._bariplomoObserver = observer;
+    } catch (_) {}
+  };
+
+  frame.addEventListener('load', onLoad);
+
+  return () => {
+    frame.removeEventListener('load', onLoad);
+    frame._bariplomoObserver?.disconnect();
+  };
+}, [currentSrc]);
 
   return (
     <div className="site-shell">
