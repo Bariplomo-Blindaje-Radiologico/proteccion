@@ -82,81 +82,77 @@ function App() {
   const frame = iframeRef.current;
   if (!frame) return;
 
+  // Reiniciar inmediatamente la altura al cambiar de página
+  frame.style.height = '1px';
+
   const onLoad = () => {
     try {
       const doc = frame.contentDocument;
       if (!doc?.documentElement || !doc.body) return;
 
-      if (!doc.getElementById('bariplomo-shell-normalize')) {
-        const style = doc.createElement('style');
-        style.id = 'bariplomo-shell-normalize';
+      // Eliminar cualquier regla anterior que pudiera alterar la altura
+      const oldStyle = doc.getElementById('bariplomo-shell-normalize');
+      if (oldStyle) oldStyle.remove();
 
-        style.textContent = `
-          html,
-          body {
-            min-height: 0 !important;
-            height: auto !important;
-            max-height: none !important;
-          }
+      // Evitar alturas artificiales dentro de las páginas
+      const style = doc.createElement('style');
+      style.id = 'bariplomo-shell-normalize';
+      style.textContent = `
+        html,
+        body {
+          height: auto !important;
+          min-height: 0 !important;
+          max-height: none !important;
+        }
 
-          body {
-            overflow-x: hidden !important;
-          }
+        body {
+          overflow-x: hidden !important;
+        }
 
-          .bp-nav,
-          .bp-mobile-menu {
-            display: none !important;
-          }
+        main {
+          min-height: 0 !important;
+        }
+      `;
 
-          main {
-            min-height: 0 !important;
-          }
+      doc.head.appendChild(style);
 
-          [class*="min-h-screen"],
-          [class*="h-[80vh]"],
-          [class*="h-[90vh]"] {
-            min-height: 0 !important;
-            height: auto !important;
-          }
-        `;
-
-        doc.head.appendChild(style);
-      }
-
-      /*
-       * IMPORTANTE:
-       * No usamos ResizeObserver.
-       * No hacemos mediciones repetitivas.
-       * La altura del iframe se establece una sola vez.
-       */
+      // Esperar a que el navegador termine de acomodar el contenido
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          const bodyHeight = doc.body.scrollHeight;
-          const htmlHeight = doc.documentElement.scrollHeight;
-
-          const height = Math.max(bodyHeight, htmlHeight);
+          const height = Math.max(
+            doc.body.scrollHeight,
+            doc.body.offsetHeight,
+            doc.documentElement.scrollHeight,
+            doc.documentElement.offsetHeight
+          );
 
           if (Number.isFinite(height) && height > 0) {
             frame.style.height = `${Math.ceil(height)}px`;
           }
+
+          const hash = new URL(frame.src, window.location.origin).hash;
+
+          if (hash) {
+            requestAnimationFrame(() => {
+              scrollFrameToHash(hash);
+            });
+          }
         });
       });
-
-      const hash = new URL(frame.src, window.location.origin).hash;
-
-      if (hash) {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            scrollFrameToHash(hash);
-          });
-        });
-      }
     } catch (_) {}
   };
 
   frame.addEventListener('load', onLoad);
 
+  // Si el documento ya terminó de cargar
+  if (frame.contentDocument?.readyState === 'complete') {
+    onLoad();
+  }
+
   return () => {
+    frame.removeEventListener('load', onLoad);
+  };
+}, [page, scrollFrameToHash]);
     frame.removeEventListener('load', onLoad);
   };
 }, [page, scrollFrameToHash]);
